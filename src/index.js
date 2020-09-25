@@ -6,8 +6,8 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());  
 
-let pacientes = require('../controllers/controller.js');
-app.use('/pacientes', pacientes);
+let controllerPacientes = require('../pacientes/controller-pacientes.js');
+app.use('/pacientes', controllerPacientes);
 
 app.listen(9001, '0.0.0.0', function(){
   console.log('Listening on port 9001');

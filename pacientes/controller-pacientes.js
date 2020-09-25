@@ -24,27 +24,34 @@ router.post('/', async (req, res, next) => {
   }
 });
 
-router.get('/', function(req, res){
-  connecttion.query('SELECT * FROM pacientestemp', function (error, results){
-    if (error) throw error
-    //console.log(results.length);
-    res.status(200).send(results)
-    //res.status(200).send(results.map(registro => ({id: registro.id, nome: registro.nome, cpf: registro.cpf})));
-  });
+router.get('/nome', async (req, res, next) => {
+  let retorno = await servicePacientes.RuleSelectPacienteNome(req.query.nome);
+  switch (retorno) {  
+    case 1:
+        return res.status(500).send({'':''});
+    case 2:
+        return res.status(406).send({'':''});
+    case 3:
+        return res.status(404).send({"Nome buscado não existe no Banco de Dados.":""});    
+    default:
+        return res.status(200).send(retorno);    
+  }
 });
 
-router.get('/nome', function(req, res){
+router.get('/nomePOSTMAN', function(req, res){
   connecttion.query(`SELECT * FROM pacientestemp WHERE nome LIKE '${req.query.nome}'`, function (error, results){
     if (error) throw error
     res.send(results.map(registro => ({id: registro.id, nome: registro.nome, cpf: registro.cpf})));
   });
 });
 
-router.post('/postman', function(req, res){
-  connecttion.query(`INSERT INTO pacientestemp (id, nome, cpf) VALUES (0,'${req.body.nome}','${req.body.cpf}')`, function (error, results){
+
+router.get('/', function(req, res){
+  connecttion.query('SELECT * FROM pacientestemp', function (error, results){
     if (error) throw error
-    if (results.affectedRows==1) res.status(201).send() 
-    else res.status(400).send()
+    //console.log(results.length);
+    res.send(results)
+    //res.status(200).send(results.map(registro => ({id: registro.id, nome: registro.nome, cpf: registro.cpf})));
   });
 });
 

@@ -10,7 +10,7 @@ exports.RuleInsertPaciente = async (data) => {
   data.nascimento = `'${dataTemp[2]}-${dataTemp[0]}-${dataTemp[1]}'`;
   }
   else data.nascimento = null;
-  if (data.cpf=='') return 2;                  // Regra que obriga o CPF ser preenchido
+  if (data.cpf==data.cpfresp) return 2; // Regra que obriga CPF ser diferente do CPF resp
   if (await daoPacientes.InsertPaciente(data) == 0) return 0;
   return 1;
 }

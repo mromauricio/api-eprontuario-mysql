@@ -4,6 +4,14 @@ const async = require('async');
 const servicePacientes = require('./service-pacientes.js');
 const router = express.Router();
 
+// TEMP for Postman tests
+const daoPacientes = require('./dao-pacientes.js');
+router.get('/', async (req, res) => {
+  let retorno = await daoPacientes.SelectPostman();
+  res.send(retorno);
+});
+//////////////
+
 router.post('/', async (req, res, next) => {
   switch (await servicePacientes.RuleInsertPaciente(req.body)) {
     case 0:
@@ -75,19 +83,6 @@ router.put('/:id', async (req, res, next) => {
     case 2:
         return res.status(406).send();
   }
-});
-
-
-
-
-// TEMP for Postman tests
-router.get('/', function(req, res){
-  connecttion.query('SELECT * FROM pacientes', function (error, results){
-    if (error) throw error
-    //console.log(results.length);
-    res.send(results)
-    //res.status(200).send(results.map(registro => ({id: registro.id, nome: registro.nome, cpf: registro.cpf})));
-  });
 });
 
 module.exports = router;

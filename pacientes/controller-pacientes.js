@@ -75,7 +75,6 @@ router.get('/registro', async (req, res, next) => {
 });
 
 router.put('/:id', async (req, res, next) => {
-  console.log('ESTOU NO CONTROLLER PUT');
   let retorno = await servicePacientes.RuleUpdatePaciente(req.params.id,req.body);
   switch (retorno) {
     case 0:

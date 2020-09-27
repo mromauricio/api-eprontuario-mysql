@@ -4,15 +4,6 @@ const async = require('async');
 const servicePacientes = require('./service-pacientes.js');
 const router = express.Router();
 
-const mysql = require('mysql');
-const connecttion = mysql.createConnection({
-  host: '172.17.0.2',
-  user: 'root',
-  password: 'pwdmysql',
-  database: 'eprontuario'
-});
-connecttion.connect();
-
 router.post('/', async (req, res, next) => {
   switch (await servicePacientes.RuleInsertPaciente(req.body)) {
     case 0:

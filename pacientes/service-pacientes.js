@@ -26,7 +26,7 @@ exports.RuleSelectPacienteNome = async (query) => {
 
 exports.RuleUpdatePaciente = async (idSearch,data) => {
   idSearch = idSearch.replace('id','');
-  if (idSearch == -1) return 2;   // Teste fictício de validação da regra de negócio para provocar return 2 
+  if (data.cpf==data.cpfresp) return 2; // Regra que obriga CPF ser diferente do CPF resp
   data.nome = data.nome.toUpperCase();
   (data.menor)? data.menor = 1 : data.menor = 0;
   (data.whatsapp)? data.whatsapp = 1 : data.whatsapp = 0;

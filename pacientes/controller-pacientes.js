@@ -1,4 +1,12 @@
-
+/*
+return  status_code
+0       200/201
+1       400 Bad Request
+2       404 Not Found
+3       406 Not Acceptable
+4       401 Unauthorized
+5       500 Internal Server Error
+*/
 const express = require('express');
 const async = require('async');
 const servicePacientes = require('./service-pacientes.js');

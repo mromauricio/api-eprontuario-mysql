@@ -5,6 +5,7 @@ exports.RuleInsertPaciente = async (data) => {
   data.nome = data.nome.toUpperCase();
   (data.menor)? data.menor = 1 : data.menor = 0;
   (data.whatsapp)? data.whatsapp = 1 : data.whatsapp = 0;
+  (data.ativo)? data.ativo = 1 : data.ativo = 0;
   if (data.nascimento.length!=0){ 
   let dataTemp = data.nascimento.split('/');
   data.nascimento = `'${dataTemp[2]}-${dataTemp[0]}-${dataTemp[1]}'`;
@@ -30,6 +31,7 @@ exports.RuleUpdatePaciente = async (idSearch,data) => {
   data.nome = data.nome.toUpperCase();
   (data.menor)? data.menor = 1 : data.menor = 0;
   (data.whatsapp)? data.whatsapp = 1 : data.whatsapp = 0;
+  (data.ativo)? data.ativo = 1 : data.ativo = 0;
   if (data.nascimento.length!=0) {
     if (data.nascimento.length <= 10) {
       let dataTemp = data.nascimento.split('/');

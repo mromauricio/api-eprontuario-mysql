@@ -10,6 +10,14 @@ router.get('/', async (req, res) => {
   let retorno = await daoPacientes.SelectPostman();
   res.send(retorno);
 });
+router.delete('/', async (req, res) => {
+  if (req.headers.authorization==12345){  // teste fictício para permitir DELETE
+    let retorno = await daoPacientes.DeletePostman(req.body.id_paciente);
+    if (retorno.affectedRows==1) res.send('Registro apagado com sucesso!');
+    else res.status(404).send('ID não localizado!')
+  }
+  else res.status(401).send('Autorização negada!')
+});
 //////////////
 
 router.post('/', async (req, res, next) => {

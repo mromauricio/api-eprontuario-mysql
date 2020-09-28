@@ -4,7 +4,7 @@ Tem por função intermediar a comunicação entre a aplicação eProntuario e o
 Utiliza framework Express 4.17.1 e dependencia mysql 2.18.1.
 A ordem execução dos arquivos .js e respectivas funções estão descritas a seguir:
 
-# /index.js
+# /src/index.js
 ```
 Inicializador da API. 
 Cria listener para: http://localhost:9001/pacientes
@@ -26,5 +26,6 @@ Do contrário, chama a função correspondente escrita em dao-pacientes.js.
 
 # /pacientes/dao-pacientes.js
 ```
-
+Estabelece a conexão com o SGBD MySQL evocando o arquivo /src/database.js a cada chamada de função.
+A função interage com o BD e retorna com o solicitado.
 ```

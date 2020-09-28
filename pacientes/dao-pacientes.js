@@ -1,5 +1,5 @@
 const async = require('async');
-const connecttion = require('../database.js');
+const connecttion = require('../src/database.js');
 
 //TEMP tests Postman ///////////
 exports.SelectPostman = async () => { 

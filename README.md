@@ -19,7 +19,7 @@ Ao receber o retorno da função envia HTTP response para o requisitante.
 
 ## /pacientes/service-pacientes.js
 ```
-Trata a regra de negócio e quando necessário adapta o body do request para interagir com o SGBD MySQL.
+Trata a regra de negócio e quando necessário adapta o body do request para interagir com o SGBD.
 Quando a regra de negócio é violada retorna imediatamente ao controller-pacientes.js. 
 Do contrário, chama a função correspondente escrita em dao-pacientes.js.
 ```

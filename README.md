@@ -11,20 +11,17 @@ Evoca controller-pacientes.js para assumir o controle a partir daí.
 
 
 ## /pacientes/controller-pacientes.js
-```
 Direciona a rota (verbo + destino) para a função correspondente escrita em service-pacientes.js.
 Ao receber o retorno da função envia HTTP response para o requisitante.
-```
+
 
 ## /pacientes/service-pacientes.js
-```
 Trata a regra de negócio e quando necessário adapta o body do request para interagir com o SGBD.
 Quando a regra de negócio é violada retorna imediatamente ao controller-pacientes.js. 
 Do contrário, chama a função correspondente escrita em dao-pacientes.js.
-```
+
 
 ## /pacientes/dao-pacientes.js
-```
 Estabelece a conexão com o SGBD MySQL evocando o arquivo /src/database.js a cada chamada de função.
 A função interage com o BD e retorna com o solicitado.
-```
+

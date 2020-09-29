@@ -11,7 +11,6 @@ exports.SelectPostman = async () => {
 exports.DeletePostman = async (id) => { 
   try{
     let retorno = await connecttion.query(`DELETE FROM pacientes WHERE id_paciente LIKE ${id}`);
-    console.log('RETORNO DAO -> ', retorno);
     return retorno;
   } catch (err) { console.log(err);  }
 }

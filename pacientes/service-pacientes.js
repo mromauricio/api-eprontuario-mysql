@@ -18,7 +18,7 @@ exports.RuleInsertPaciente = async (data) => {
 
 exports.RuleSelectPacienteNome = async (query) => {
   query = query.toUpperCase();
-  if (query == '') return 3;   // Teste fictício de validação da regra de negócio para provocar return 2 
+  if (query == '') return 3;   // Teste fictício de validação da regra de negócio 
   let retorno = await daoPacientes.SelectPacienteNome(query)
   if (retorno == '') return 2;
   if (retorno == 5) return 5;

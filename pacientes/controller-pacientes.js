@@ -20,7 +20,7 @@ router.get('/', async (req, res) => {
   res.send(retorno);
 });
 router.delete('/', async (req, res) => {
-  if (req.headers.authorization==12345){  // teste fictício para permitir DELETE
+  if (req.headers.authorization==12345){  // token fictício para permitir DELETE
     let retorno = await daoPacientes.DeletePostman(req.body.id_paciente);
     if (retorno.affectedRows==1) res.send('Registro apagado com sucesso!');
     else res.status(404).send('ID não localizado!')

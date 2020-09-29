@@ -3,7 +3,7 @@ let util = require('util');
 
 let pool = mysql.createPool({
     connectionLimit: 10,
-    host: '172.17.0.2',
+    host: 'mysql-container', //172.17.0.2
     user: 'root',
     password: 'pwdmysql',
     database: 'eprontuario'

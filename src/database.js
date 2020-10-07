@@ -6,7 +6,8 @@ let pool = mysql.createPool({
     host: 'mysql-container', //172.17.0.2
     user: 'root',
     password: 'pwdmysql',
-    database: 'eprontuario'
+    database: 'eprontuario',
+    insecureAuth: true 
 });
 
 pool.getConnection((err, connection) => {

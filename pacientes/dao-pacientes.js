@@ -27,7 +27,7 @@ exports.InsertPaciente = async (data) => {
 
 exports.SelectPacienteNome = async (query) => {
   try{
-  let rows = await connecttion.query(`SELECT * FROM pacientes WHERE nome LIKE '${query}'`);
+  let rows = await connecttion.query(`SELECT * FROM pacientes WHERE nome LIKE '${query}' ORDER BY nome`);
   return rows;
   } catch (err) { console.log(err); return 5;  }
 }

@@ -44,11 +44,11 @@ router.get('/nome', async (req, res, next) => {
   let retorno = await servicePacientes.RuleSelectPacienteNome(req.query.nome);
   switch (retorno) {  
     case 2:
-      return res.status(404).send({'':''});    
+      return res.status(404).send();    
     case 3:
-      return res.status(406).send({'':''});
+      return res.status(406).send();
     case 5:
-      return res.status(500).send({'':''});
+      return res.status(500).send();
     default:
       return res.status(200).send(retorno);    
   }
@@ -58,9 +58,9 @@ router.get('/cpf', async (req, res, next) => {
   let retorno = await servicePacientes.RuleSelectPacienteCpf(req.query.cpf);
   switch (retorno) {  
     case 2:
-      return res.status(404).send({'':''});    
+      return res.status(404).send();    
     case 5:
-      return res.status(500).send({'':''});
+      return res.status(500).send();
     default:
       return res.status(200).send(retorno);    
   }
@@ -70,9 +70,9 @@ router.get('/cns', async (req, res, next) => {
   let retorno = await servicePacientes.RuleSelectPacienteCns(req.query.cns);
   switch (retorno) {  
     case 2:
-      return res.status(404).send({'':''});    
+      return res.status(404).send();    
     case 5:
-      return res.status(500).send({'':''});
+      return res.status(500).send();
     default:
       return res.status(200).send(retorno);    
   }
@@ -82,9 +82,9 @@ router.get('/registro', async (req, res, next) => {
   let retorno = await servicePacientes.RuleSelectPacienteRegistro(req.query.registro);
   switch (retorno) {  
     case 2:
-      return res.status(404).send({'':''});    
+      return res.status(404).send();    
     case 5:
-      return res.status(500).send({'':''});
+      return res.status(500).send();
     default:
       return res.status(200).send(retorno);    
   }

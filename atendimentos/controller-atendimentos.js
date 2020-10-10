@@ -2,7 +2,6 @@ const express = require('express');
 const async = require('async');
 const viewAtendimentos = require('./view-atendimentos.js');
 const router = express.Router();
-const fs = require('fs');
 
 router.get('/html', async (req, res, next) => {
   res.header('Content-Type','text/html' );

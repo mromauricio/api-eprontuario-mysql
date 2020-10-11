@@ -38,6 +38,7 @@ router.post('/', async (req, res, next) => {
 });
 
 router.get('/nome', async (req, res, next) => {
+  res.header('Content-Type','application/json');
   let retorno = await servicePacientes.RuleSelectPacienteNome(req.query.nome);
   switch (retorno) {  
     case 2: return res.status(404).send({});    
@@ -48,6 +49,7 @@ router.get('/nome', async (req, res, next) => {
 });
 
 router.get('/cpf', async (req, res, next) => {
+  res.header('Content-Type','application/json');
   let retorno = await servicePacientes.RuleSelectPacienteCpf(req.query.cpf);
   switch (retorno) {  
     case 2: return res.status(404).send({});    
@@ -57,6 +59,7 @@ router.get('/cpf', async (req, res, next) => {
 });
 
 router.get('/cns', async (req, res, next) => {
+  res.header('Content-Type','application/json');
   let retorno = await servicePacientes.RuleSelectPacienteCns(req.query.cns);
   switch (retorno) {  
     case 2: return res.status(404).send({});    
@@ -66,10 +69,11 @@ router.get('/cns', async (req, res, next) => {
 });
 
 router.get('/registro', async (req, res, next) => {
+  res.header('Content-Type','application/json');
   let retorno = await servicePacientes.RuleSelectPacienteRegistro(req.query.registro);
   switch (retorno) {  
-    case 2: return res.status(404).send();    
-    case 5: return res.status(500).send();
+    case 2: return res.status(404).send({});    
+    case 5: return res.status(500).send({});
     default: return res.status(200).send(retorno);    
   }
 });

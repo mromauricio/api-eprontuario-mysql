@@ -6,7 +6,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());  
 
-let controllerPacientes = require('../pacientes/controller-pacientes.js');
+let controllerPacientes = require('../pacientes/controller-pacientes');
 app.use('/pacientes', controllerPacientes);
 
 let controllerAtendimentos = require('../atendimentos/controller-atendimentos.js');

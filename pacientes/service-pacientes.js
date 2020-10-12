@@ -58,6 +58,14 @@ exports.RuleUpdatePaciente = async (idSearch,data) => {
   return 5
 }
 
+exports.RuleUpdatePacienteDatalog = async (data) => {
+  idSearch = data.id_paciente;
+  let retorno = await daoPacientes.UpdatePacienteDatalog(idSearch);
+  if (retorno == 0) return 0;
+  if (retorno == 2) return 2;
+  return 5
+}
+
 
 exports.RuleSelectPacienteCpf = async (query) => {
   let retorno = await daoPacientes.SelectPacienteCpf(query)

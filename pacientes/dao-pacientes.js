@@ -40,6 +40,14 @@ exports.UpdatePaciente = async (idSearch, data) => {
   } catch (err) { console.log(err); return 5;  }
 }
 
+exports.UpdatePacienteDatalog = async (idSearch) => {
+  try{
+      let retorno = await connecttion.query(`UPDATE pacientes SET datalog=current_timestamp WHERE id_paciente = ${idSearch}`);
+      if (retorno.affectedRows == 1) return 0;
+      return 2
+  } catch (err) { console.log(err); return 5;  }
+}
+
 exports.SelectPacienteCpf = async (query) => {
   try{
   let rows = await connecttion.query(`SELECT * FROM pacientes WHERE cpf LIKE '${query}'`);

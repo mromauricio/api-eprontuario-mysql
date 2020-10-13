@@ -55,6 +55,13 @@ exports.SelectPacienteCpf = async (query) => {
   } catch (err) { console.log(err); return 5;  }
 }
 
+exports.SelectPacienteCpfResp = async (query) => {
+  try{
+  let rows = await connecttion.query(`SELECT * FROM pacientes WHERE cpfresp LIKE '${query}'`);
+  return rows;
+  } catch (err) { console.log(err); return 5;  }
+}
+
 exports.SelectPacienteCns = async (query) => {
   try{
   let rows = await connecttion.query(`SELECT * FROM pacientes WHERE cns LIKE '${query}'`);

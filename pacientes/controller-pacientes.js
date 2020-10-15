@@ -100,12 +100,12 @@ router.put('/:id', async (req, res, next) => {
 });
 
 router.put('/', async (req, res, next) => {
-  console.log('ESTOU NO CONTROLLER-PACIENTES - PUT');
+  res.header('Content-Encoding','identity');
   let retorno = await servicePacientes.RuleUpdatePacienteDatalog(req.body);
   switch (retorno) {
     case 0: return res.status(200).send();
     case 2: return res.status(404).send();
-    // case 3: return res.status(406).send('foi daqui');
+    case 3: return res.status(406).send('foi daqui');
     case 5: return res.status(500).send();    
   }
 });

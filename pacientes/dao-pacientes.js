@@ -9,69 +9,87 @@ exports.SelectPostman = async () => {
   } catch (err) { console.log(err);  }
 }
 exports.DeletePostman = async (id) => { 
+  let query = 'DELETE FROM pacientes WHERE id_paciente = ?'
   try{
-    let retorno = await connecttion.query(`DELETE FROM pacientes WHERE id_paciente = ${id}`);
+    let retorno = await connecttion.query(query, id);
     return retorno;
   } catch (err) { console.log(err);  }
 }
 ////////////////////////////////////////////
 
 exports.InsertPaciente = async (data) => {
+  let query = 'INSERT INTO pacientes SET ?';
+  let post = {id_paciente: 0, nome:data.nome, menor:data.menor, responsavel:data.responsavel, cpfresp:data.cpfresp, cpf:data.cpf, cns:data.cns, registro:data.registro, nacionalidade:data.nacionalidade, nascimento:data.nascimento, genero:data.genero, tel:data.tel, cel:data.cel, whatsapp:data.whatsapp, email:data.email, endereco:data.endereco, cep:data.cep, bairro:data.bairro, uf:data.uf, cidade:data.cidade, historico:data.historico, medicamento:data.medicamento, cirurgia:data.cirurgia, trauma:data.trauma, ativo:data.ativo};
   try{
-      let retorno =  await connecttion.query(`INSERT INTO pacientes (id_paciente, nome, menor, responsavel, cpfresp, cpf, cns, registro, nacionalidade, nascimento, genero, tel, cel, whatsapp, email, endereco, cep, bairro, uf, cidade, historico, medicamento, cirurgia, trauma, ativo) VALUES (0,'${data.nome}','${data.menor}','${data.responsavel}','${data.cpfresp}',${data.cpf},${data.cns},${data.registro},'${data.nacionalidade}',${data.nascimento},'${data.genero}','${data.tel}','${data.cel}','${data.whatsapp}','${data.email}','${data.endereco}','${data.cep}','${data.bairro}','${data.uf}','${data.cidade}','${data.historico}','${data.medicamento}','${data.cirurgia}','${data.trauma}','${data.ativo}')`);
+      let retorno =  await connecttion.query(query, post);
       if (retorno.affectedRows == 1 ) return 0;
       return 5;
   }
   catch (err) { console.log(err); return 5; }
 }
 
-exports.SelectPacienteNome = async (query) => {
+exports.SelectPacienteNome = async (nome) => {
+  let query = 'SELECT * FROM pacientes WHERE nome LIKE ? ORDER BY nome';
+  let post = nome;
   try{
-  let rows = await connecttion.query(`SELECT * FROM pacientes WHERE nome LIKE '${query}' ORDER BY nome`);
+  let rows = await connecttion.query(query, post);
   return rows;
   } catch (err) { console.log(err); return 5;  }
 }
 
 exports.UpdatePaciente = async (idSearch, data) => {
+  let query = 'UPDATE pacientes SET ? WHERE id_paciente = ?';
+  // let post = {nome=data.nome, menor=data.menor, responsavel=data.responsavel, cpfresp=data.cpfresp, cpf=data.cpf, cns=data.cns, registro=data.registro, nacionalidade=data.nacionalidade, nascimento=data.nascimento, genero=data.genero, tel=data.tel, cel=data.cel, whatsapp=data.whatsapp, email=data.email, endereco=data.endereco, cep=data.cep, bairro=data.bairro, uf=data.uf, cidade=data.cidade, historico=data.historico, medicamento=data.medicamento, cirurgia=data.cirurgia, trauma=data.trauma, ativo=data.ativo};
+  let post = {nome:data.nome, menor:data.menor, responsavel:data.responsavel, cpfresp:data.cpfresp, cpf:data.cpf, cns:data.cns, registro:data.registro, nacionalidade:data.nacionalidade, nascimento:data.nascimento, genero:data.genero, tel:data.tel, cel:data.cel, whatsapp:data.whatsapp, email:data.email, endereco:data.endereco, cep:data.cep, bairro:data.bairro, uf:data.uf, cidade:data.cidade, historico:data.historico, medicamento:data.medicamento, cirurgia:data.cirurgia, trauma:data.trauma, ativo:data.ativo};
   try{
-      let retorno = await connecttion.query(`UPDATE pacientes SET nome='${data.nome}', menor='${data.menor}', responsavel='${data.responsavel}', cpfresp='${data.cpfresp}', cpf=${data.cpf}, cns=${data.cns}, registro=${data.registro}, nacionalidade='${data.nacionalidade}', nascimento = ${data.nascimento} , genero='${data.genero}', tel='${data.tel}', cel='${data.cel}', whatsapp='${data.whatsapp}', email='${data.email}', endereco='${data.endereco}', cep='${data.cep}', bairro='${data.bairro}', uf='${data.uf}', cidade='${data.cidade}', historico='${data.historico}', medicamento='${data.medicamento}', cirurgia='${data.cirurgia}', trauma='${data.trauma}', ativo='${data.ativo}' WHERE id_paciente = ${idSearch}`);
+      let retorno = await connecttion.query(query, [post, idSearch]);
       if (retorno.affectedRows == 1) return 0;
       return 2
-  } catch (err) { console.log(err); return 5;  }
+  } catch (err) { console.log(err); return 5;  } 
 }
 
 exports.UpdatePacienteDatalog = async (idSearch) => {
+  let query = 'UPDATE pacientes SET datalog=current_timestamp WHERE id_paciente = ?';
+  let post = idSearch;
   try{
-      let retorno = await connecttion.query(`UPDATE pacientes SET datalog=current_timestamp WHERE id_paciente = ${idSearch}`);
+      let retorno = await connecttion.query(query, post);
       if (retorno.affectedRows == 1) return 0;
       return 2
   } catch (err) { console.log(err); return 5;  }
 }
 
-exports.SelectPacienteCpf = async (query) => {
+exports.SelectPacienteCpf = async (cpf) => {
+  let query = 'SELECT * FROM pacientes WHERE cpf LIKE ?';
+  let post = cpf;
   try{
-  let rows = await connecttion.query(`SELECT * FROM pacientes WHERE cpf LIKE '${query}'`);
+  let rows = await connecttion.query(query, post);
   return rows;
   } catch (err) { console.log(err); return 5;  }
 }
 
-exports.SelectPacienteCpfResp = async (query) => {
+exports.SelectPacienteCpfResp = async (cpfresp) => {
+  let query = 'SELECT * FROM pacientes WHERE cpfresp LIKE ?';
+  let post = cpfresp;
   try{
-  let rows = await connecttion.query(`SELECT * FROM pacientes WHERE cpfresp LIKE '${query}'`);
+  let rows = await connecttion.query(query, post);
   return rows;
   } catch (err) { console.log(err); return 5;  }
 }
 
-exports.SelectPacienteCns = async (query) => {
+exports.SelectPacienteCns = async (cns) => {
+  let query = 'SELECT * FROM pacientes WHERE cns LIKE ?';
+  let post = cns;
   try{
-  let rows = await connecttion.query(`SELECT * FROM pacientes WHERE cns LIKE '${query}'`);
+  let rows = await connecttion.query(query, post);
   return rows;
   } catch (err) { console.log(err); return 5;  }
 }  
 
-exports.SelectPacienteRegistro = async (query) => {
+exports.SelectPacienteRegistro = async (registro) => {
+  let query = 'SELECT * FROM pacientes WHERE registro LIKE ?';
+  let post = registro;
   try{
-  let rows = await connecttion.query(`SELECT * FROM pacientes WHERE registro LIKE '${query}'`);
+  let rows = await connecttion.query(query, post);
   return rows;
   } catch (err) { console.log(err); return 5;  }
 }  

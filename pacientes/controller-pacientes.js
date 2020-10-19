@@ -29,6 +29,7 @@ router.delete('/', async (req, res) => {
 });
 //////////////
 
+
 router.post('/', async (req, res, next) => {
   switch (await servicePacientes.RuleInsertPaciente(req.body)) {
     case 0: return res.status(201).send();

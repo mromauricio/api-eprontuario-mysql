@@ -15,3 +15,11 @@ atenuante:data.atenuante, tratamentoanterior:data.tratamentoanterior};
   }
   catch (err) { console.log(err); return 5; }
 }
+
+exports.SelectAtendimentosPaciente = async (id_paciente) => {
+  let query = 'SELECT id_paciente,data,queixa,evolucao FROM atendimentos WHERE id_paciente=? ORDER BY data desc';
+  try{
+  let rows = await connecttion.query(query, id_paciente);
+  return rows;
+  } catch (err) { console.log(err); return 5;  }
+}

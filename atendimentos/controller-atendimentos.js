@@ -4,11 +4,6 @@ const viewAtendimentos = require('./view-atendimentos.js');
 const serviceAtendimentos = require('./service-atendimentos.js')
 const router = express.Router();
 
-// router.post('/', async (req, res, next) => {
-//   console.log(req.body);
-//   res.status(201).send();
-// });
-
 router.post('/', async (req, res, next) => {
   switch (await serviceAtendimentos.RuleInsertAtendimento(req.body)) {
     case 0: return res.status(201).send();
@@ -17,6 +12,16 @@ router.post('/', async (req, res, next) => {
   }
 });
 
+router.get('/paciente', async (req, res, next) => {
+  res.header('Content-Type','application/json');
+  let retorno = await serviceAtendimentos.RuleSelectAtendimentosPaciente(req.query.id);
+  switch (retorno) {  
+    case 2: return res.status(404).send({});    
+    case 3: return res.status(406).send({});
+    case 5: return res.status(500).send({});
+    default: return res.status(200).send(retorno);    
+  }
+});
 
 
 

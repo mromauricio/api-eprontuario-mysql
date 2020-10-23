@@ -28,6 +28,13 @@ exports.RuleSelectPacienteNome = async (query) => {
   return retorno;
 }
 
+exports.RuleSelectPacienteId = async (query) => {
+  let retorno = await daoPacientes.SelectPacienteId(query)
+  if (retorno == '') return 2;
+  if (retorno == 5) return 5;
+  return retorno;
+}
+
 exports.RuleUpdatePaciente = async (idSearch,data) => {
   idSearch = idSearch.replace('id','');
   if (data.cpf==data.cpfresp) return 3; // Regra que obriga CPF ser diferente do CPF resp

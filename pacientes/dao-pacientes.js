@@ -36,6 +36,14 @@ exports.SelectPacienteNome = async (nome) => {
   } catch (err) { console.log(err); return 5;  }
 }
 
+exports.SelectPacienteId = async (id_paciente) => {
+  let query = 'SELECT * FROM pacientes WHERE id_paciente = ?';
+  try{
+  let rows = await connecttion.query(query, id_paciente);
+  return rows;
+  } catch (err) { console.log(err); return 5;  }
+}
+
 exports.UpdatePaciente = async (idSearch, data) => {
   let query = 'UPDATE pacientes SET ? WHERE id_paciente = ?';
   let post = {nome:data.nome, menor:data.menor, responsavel:data.responsavel, cpfresp:data.cpfresp, cpf:data.cpf, cns:data.cns, registro:data.registro, nacionalidade:data.nacionalidade, nascimento:data.nascimento, genero:data.genero, tel:data.tel, cel:data.cel, whatsapp:data.whatsapp, email:data.email, endereco:data.endereco, cep:data.cep, bairro:data.bairro, uf:data.uf, cidade:data.cidade, historico:data.historico, medicamento:data.medicamento, cirurgia:data.cirurgia, trauma:data.trauma, ativo:data.ativo};

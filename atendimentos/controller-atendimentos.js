@@ -14,7 +14,7 @@ router.post('/', async (req, res, next) => {
 
 router.put('/', async (req, res, next) => {
   switch (await serviceAtendimentos.RuleUpdateAtendimento(req.body)) {
-    case 0: return res.status(201).send();
+    case 0: return res.status(200).send();
     case 3: return res.status(406).send();
     case 5: return res.status(500).send();    
   }

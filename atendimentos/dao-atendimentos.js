@@ -37,10 +37,16 @@ exports.InsertAtendimento = async (data) => {
 }
 
 exports.UpdateAtendimento = async (data) => {
-  let query = 'UPDATE atendimentos SET ? WHERE id_atendimento = ?';
-  let post = {data:data.data, horario:data.horario, duracao:data.duracao, queixa:data.queixa, trajetodor:data.trajetodor, intensidadedor:data.intensidadedor, tipodor:data.tipodor, evolucao:data.evolucao, agravante:data.agravante, atenuante:data.atenuante, tratamentoanterior:data.tratamentoanterior};
+  let query1 = 'UPDATE tratamentos SET ? WHERE id_tratamento = ?';
+  let post1 = {descricao:data.titulotratamento, status:data.status};
   try{
-      let retorno =  await connecttion.query(query, [post, data.id_atendimento]);
+      await connecttion.query(query1, [post1, data.id_tratamento]);
+  }
+  catch (err) { console.log(err); return 5; }
+  let query2 = 'UPDATE atendimentos SET ? WHERE id_atendimento = ?';
+  let post2 = {data:data.data, horario:data.horario, duracao:data.duracao, quadrogeral:data.quadrogeral, queixa:data.queixa, trajetodor:data.trajetodor, intensidadedor:data.intensidadedor, tipodor:data.tipodor, evolucao:data.evolucao, agravante:data.agravante, atenuante:data.atenuante, tratamentoanterior:data.tratamentoanterior};
+  try{
+      let retorno =  await connecttion.query(query2, [post2, data.id_atendimento]);
       if (retorno.affectedRows == 1 ) return 0;
       return 5;
   }
@@ -67,6 +73,14 @@ exports.SelectTratamento = async (id_tratamento) => {
   let query = 'SELECT * FROM tratamentos WHERE id_tratamento=?';
   try{
   let rows = await connecttion.query(query, id_tratamento);
+  return rows;
+  } catch (err) { console.log(err); return 5;  }
+}
+
+exports.SelectAtendimento = async (id_atendimento) => {
+  let query = 'SELECT pro.nome profissional, pac.nome paciente, t.descricao titulotratamento, t.status, t.id_paciente, a.* FROM atendimentos a INNER JOIN profissionais pro ON a.id_profissional=pro.id_profissional  INNER JOIN tratamentos t ON a.id_tratamento=t.id_tratamento  INNER JOIN pacientes pac ON pac.id_paciente=t.id_paciente WHERE  a.id_atendimento=?';
+  try{
+  let rows = await connecttion.query(query, id_atendimento);
   return rows;
   } catch (err) { console.log(err); return 5;  }
 }

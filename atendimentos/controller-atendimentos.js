@@ -61,6 +61,18 @@ router.get('/tratamento', async (req, res, next) => {
   }
 });
 
+router.get('/atendimento', async (req, res, next) => {
+  res.header('Content-Type','application/json');
+  let retorno = await serviceAtendimentos.RuleSelectAtendimento(req.query.id_atendimento);
+  switch (retorno) {  
+    case 2: return res.status(404).send({});    
+    case 3: return res.status(406).send({});
+    case 5: return res.status(500).send({});
+    default: return res.status(200).send(retorno);    
+  }
+});
+
+
 //////////////////// TESTES FS READFILE ///////////////////
 router.get('/html', async (req, res, next) => {
   res.header('Content-Type','text/html' );

@@ -30,3 +30,10 @@ exports.RuleSelectAtendimentosTratamento = async (id_tratamento) => {
   if (retorno == 5) return 5;
   return retorno;
 }
+
+exports.RuleSelectTratamento = async (query) => {
+  let retorno = await daoAtendimentos.SelectTratamento(query)
+  if (retorno == '') return 2;
+  if (retorno == 5) return 5;
+  return retorno;
+}

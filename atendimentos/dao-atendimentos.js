@@ -14,18 +14,18 @@ exports.InsertTratamento = async (data) => {
   try{
     let retorno =  await connecttion.query(query2, post2);
     if (retorno.affectedRows == 1 ) return 0;
-      return 5;
+    return 5;
   }
   catch (err) { console.log(err); return 5; }
 }
 
 exports.InsertAtendimento = async (data) => {
   let query = 'INSERT INTO atendimentos SET ?';
-  let post = {id_atendimento:0, id_paciente:data.id_paciente, id_profissional:data.id_profissional, data:data.data, horario:data.horario, duracao:data.duracao, queixa:data.queixa, trajetodor:data.trajetodor, intensidadedor:data.intensidadedor, tipodor:data.tipodor, evolucao:data.evolucao, agravante:data.agravante, atenuante:data.atenuante, tratamentoanterior:data.tratamentoanterior};
+  let post = {id_atendimento:0, id_profissional:data.id_profissional, id_tratamento:data.id_tratamento, data:data.data, horario:data.horario, duracao:data.duracao, queixa:data.queixa, quadrogeral:data.quadrogeral, trajetodor:data.trajetodor, intensidadedor:data.intensidadedor, tipodor:data.tipodor, evolucao:data.evolucao, agravante:data.agravante, atenuante:data.atenuante, tratamentoanterior:data.tratamentoanterior};
   try{
-      let retorno =  await connecttion.query(query, post);
-      if (retorno.affectedRows == 1 ) return 0;
-      return 5;
+    let retorno =  await connecttion.query(query, post);
+    if (retorno.affectedRows == 1 ) return 0;
+    return 5;
   }
   catch (err) { console.log(err); return 5; }
 }
@@ -50,7 +50,15 @@ exports.SelectTratamentosPaciente = async (id_paciente) => {
 }
 
 exports.SelectAtendimentosTratamento = async (id_tratamento) => {
-  let query = 'SELECT pro.nome profissional, pac.nome paciente, t.descricao titulotratamento, t.status, a.* FROM atendimentos a INNER JOIN profissionais pro ON a.id_profissional=pro.id_profissional  INNER JOIN tratamentos t ON a.id_tratamento=t.id_tratamento  INNER JOIN pacientes pac ON pac.id_paciente=t.id_paciente WHERE  a.id_tratamento=?';
+  let query = 'SELECT pro.nome profissional, pac.nome paciente, t.descricao titulotratamento, t.status, t.id_paciente, a.* FROM atendimentos a INNER JOIN profissionais pro ON a.id_profissional=pro.id_profissional  INNER JOIN tratamentos t ON a.id_tratamento=t.id_tratamento  INNER JOIN pacientes pac ON pac.id_paciente=t.id_paciente WHERE  a.id_tratamento=?';
+  try{
+  let rows = await connecttion.query(query, id_tratamento);
+  return rows;
+  } catch (err) { console.log(err); return 5;  }
+}
+
+exports.SelectTratamento = async (id_tratamento) => {
+  let query = 'SELECT * FROM tratamentos WHERE id_tratamento=?';
   try{
   let rows = await connecttion.query(query, id_tratamento);
   return rows;

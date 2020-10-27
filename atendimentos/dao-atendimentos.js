@@ -3,14 +3,14 @@ const connecttion = require('../src/database.js');
 
 exports.InsertTratamento = async (data) => {
   let query1 = 'INSERT INTO tratamentos SET ?';
-  let post1 = {id_tratamento:0, id_paciente:data.id_paciente, descricao:data.titulotratamento, status:data.status, datalog:data.data};
+  let post1 = {id_tratamento:0, id_paciente:data.id_paciente, descricao:data.titulotratamento, status:data.status};
   let retornoInsert;
   try{
     retornoInsert =  await connecttion.query(query1, post1);
   }
   catch (err) { console.log(err); return 5; }
   let query2 = 'INSERT INTO atendimentos SET ?';
-  let post2 = {id_atendimento:0, id_tratamento:retornoInsert.insertId, id_profissional:data.id_profissional, data:data.data, horario:data.horario, duracao:data.duracao, queixa:data.queixa, quadrogeral:data.quadrogeral, trajetodor:data.trajetodor, intensidadedor:data.intensidadedor, tipodor:data.tipodor, evolucao:data.evolucao, agravante:data.agravante, atenuante:data.atenuante, tratamentoanterior:data.tratamentoanterior};
+  let post2 = {id_atendimento:0, id_tratamento:retornoInsert.insertId, id_profissional:data.id_profissional, preenchido:data.preenchido, data:data.data, horario:data.horario, duracao:data.duracao, queixa:data.queixa, quadrogeral:data.quadrogeral, trajetodor:data.trajetodor, intensidadedor:data.intensidadedor, tipodor:data.tipodor, evolucao:data.evolucao, agravante:data.agravante, atenuante:data.atenuante, tratamentoanterior:data.tratamentoanterior};
   try{
     let retorno =  await connecttion.query(query2, post2);
     if (retorno.affectedRows == 1 ) return 0;
@@ -27,7 +27,7 @@ exports.InsertAtendimento = async (data) => {
   }
   catch (err) { console.log(err); return 5; }
   let query2 = 'INSERT INTO atendimentos SET ?';
-  let post2 = {id_atendimento:0, id_profissional:data.id_profissional, id_tratamento:data.id_tratamento, data:data.data, horario:data.horario, duracao:data.duracao, queixa:data.queixa, quadrogeral:data.quadrogeral, trajetodor:data.trajetodor, intensidadedor:data.intensidadedor, tipodor:data.tipodor, evolucao:data.evolucao, agravante:data.agravante, atenuante:data.atenuante, tratamentoanterior:data.tratamentoanterior};
+  let post2 = {id_atendimento:0, id_profissional:data.id_profissional, id_tratamento:data.id_tratamento, preenchido:data.preenchido, data:data.data, horario:data.horario, duracao:data.duracao, queixa:data.queixa, quadrogeral:data.quadrogeral, trajetodor:data.trajetodor, intensidadedor:data.intensidadedor, tipodor:data.tipodor, evolucao:data.evolucao, agravante:data.agravante, atenuante:data.atenuante, tratamentoanterior:data.tratamentoanterior};
   try{
     let retorno =  await connecttion.query(query2, post2);
     if (retorno.affectedRows == 1 ) return 0;
@@ -44,7 +44,7 @@ exports.UpdateAtendimento = async (data) => {
   }
   catch (err) { console.log(err); return 5; }
   let query2 = 'UPDATE atendimentos SET ? WHERE id_atendimento = ?';
-  let post2 = {data:data.data, horario:data.horario, duracao:data.duracao, quadrogeral:data.quadrogeral, queixa:data.queixa, trajetodor:data.trajetodor, intensidadedor:data.intensidadedor, tipodor:data.tipodor, evolucao:data.evolucao, agravante:data.agravante, atenuante:data.atenuante, tratamentoanterior:data.tratamentoanterior};
+  let post2 = {preenchido:data.preenchido, data:data.data, horario:data.horario, duracao:data.duracao, quadrogeral:data.quadrogeral, queixa:data.queixa, trajetodor:data.trajetodor, intensidadedor:data.intensidadedor, tipodor:data.tipodor, evolucao:data.evolucao, agravante:data.agravante, atenuante:data.atenuante, tratamentoanterior:data.tratamentoanterior};
   try{
       let retorno =  await connecttion.query(query2, [post2, data.id_atendimento]);
       if (retorno.affectedRows == 1 ) return 0;

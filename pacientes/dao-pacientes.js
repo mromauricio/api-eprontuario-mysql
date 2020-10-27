@@ -19,7 +19,7 @@ exports.DeletePostman = async (id) => {
 
 exports.InsertPaciente = async (data) => {
   let query = 'INSERT INTO pacientes SET ?';
-  let post = {id_paciente: 0, nome:data.nome, menor:data.menor, responsavel:data.responsavel, cpfresp:data.cpfresp, cpf:data.cpf, cns:data.cns, registro:data.registro, nacionalidade:data.nacionalidade, nascimento:data.nascimento, genero:data.genero, tel:data.tel, cel:data.cel, whatsapp:data.whatsapp, email:data.email, endereco:data.endereco, cep:data.cep, bairro:data.bairro, uf:data.uf, cidade:data.cidade, historico:data.historico, medicamento:data.medicamento, cirurgia:data.cirurgia, trauma:data.trauma, ativo:data.ativo};
+  let post = {id_paciente: 0, nome:data.nome, menor:data.menor, responsavel:data.responsavel, cpfresp:data.cpfresp, cpf:data.cpf, cns:data.cns, registro:data.registro, nacionalidade:data.nacionalidade, nascimento:data.nascimento, genero:data.genero, tel:data.tel, cel:data.cel, whatsapp:data.whatsapp, email:data.email, endereco:data.endereco, cep:data.cep, bairro:data.bairro, uf:data.uf, cidade:data.cidade, historico:data.historico, medicamento:data.medicamento, cirurgia:data.cirurgia, trauma:data.trauma, ativo:data.ativo, id_formulario:data.formulario};
   try{
       let retorno =  await connecttion.query(query, post);
       if (retorno.affectedRows == 1 ) return 0;
@@ -46,7 +46,7 @@ exports.SelectPacienteId = async (id_paciente) => {
 
 exports.UpdatePaciente = async (idSearch, data) => {
   let query = 'UPDATE pacientes SET ? WHERE id_paciente = ?';
-  let post = {nome:data.nome, menor:data.menor, responsavel:data.responsavel, cpfresp:data.cpfresp, cpf:data.cpf, cns:data.cns, registro:data.registro, nacionalidade:data.nacionalidade, nascimento:data.nascimento, genero:data.genero, tel:data.tel, cel:data.cel, whatsapp:data.whatsapp, email:data.email, endereco:data.endereco, cep:data.cep, bairro:data.bairro, uf:data.uf, cidade:data.cidade, historico:data.historico, medicamento:data.medicamento, cirurgia:data.cirurgia, trauma:data.trauma, ativo:data.ativo};
+  let post = {nome:data.nome, menor:data.menor, responsavel:data.responsavel, cpfresp:data.cpfresp, cpf:data.cpf, cns:data.cns, registro:data.registro, nacionalidade:data.nacionalidade, nascimento:data.nascimento, genero:data.genero, tel:data.tel, cel:data.cel, whatsapp:data.whatsapp, email:data.email, endereco:data.endereco, cep:data.cep, bairro:data.bairro, uf:data.uf, cidade:data.cidade, historico:data.historico, medicamento:data.medicamento, cirurgia:data.cirurgia, trauma:data.trauma, ativo:data.ativo, id_formulario:data.formulario};
   try{
       let retorno = await connecttion.query(query, [post, idSearch]);
       if (retorno.affectedRows == 1) return 0;

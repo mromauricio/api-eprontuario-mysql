@@ -8,13 +8,14 @@ exports.RuleInsertPaciente = async (data) => {
   (data.ativo)? data.ativo = 1 : data.ativo = 0;
   if (data.nascimento.length!=0){ 
   let dataTemp = data.nascimento.split('/');
-  data.nascimento = `${dataTemp[2]}-${dataTemp[0]}-${dataTemp[1]}`;
+  data.nascimento = `${dataTemp[2]}-${dataTemp[1]}-${dataTemp[0]}`;
   }
   else data.nascimento = null;
   if (data.cpf == data.cpfresp) return 3; // Regra que obriga CPF ser diferente do CPF resp
   if (data.cpf.length==0)  data.cpf = null
   if (data.cns.length==0)  data.cns = null
   if (data.registro.length==0)  data.registro = null
+  if (data.formulario.length<2) data.formulario = null
   if (await daoPacientes.InsertPaciente(data) == 0) return 0;
   return 5;
 }
@@ -45,7 +46,7 @@ exports.RuleUpdatePaciente = async (idSearch,data) => {
   if (data.nascimento.length!=0) {
     if (data.nascimento.length <= 10) {
       let dataTemp = data.nascimento.split('/');
-      data.nascimento = `${dataTemp[2]}-${dataTemp[0]}-${dataTemp[1]}`;
+      data.nascimento = `${dataTemp[2]}-${dataTemp[1]}-${dataTemp[0]}`;
     }
     else data.nascimento = `${data.nascimento.substring(0,10)}`;
   }
@@ -53,6 +54,7 @@ exports.RuleUpdatePaciente = async (idSearch,data) => {
   if (data.cpf.length==0)  data.cpf = null
   if (data.cns.length==0)  data.cns = null
   if (data.registro.length==0)  data.registro = null
+  if (data.formulario.length<2) data.formulario = null
   let retorno = await daoPacientes.UpdatePaciente(idSearch,data);
   if (retorno == 0) return 0;
   if (retorno == 2) return 2;

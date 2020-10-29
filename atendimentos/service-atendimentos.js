@@ -44,3 +44,10 @@ exports.RuleSelectAtendimento = async (query) => {
   if (retorno == 5) return 5;
   return retorno;
 }
+
+exports.RuleSelectUltimoquadrogeral = async (query) => {
+  let retorno = await daoAtendimentos.SelectUltimoquadrogeral(query)
+  if (retorno == '') return 2;
+  if (retorno == 5) return 5;
+  return retorno;
+}

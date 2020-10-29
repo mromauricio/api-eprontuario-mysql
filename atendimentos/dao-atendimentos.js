@@ -84,3 +84,13 @@ exports.SelectAtendimento = async (id_atendimento) => {
   return rows;
   } catch (err) { console.log(err); return 5;  }
 }
+
+
+exports.SelectUltimoquadrogeral = async (id_tratamento) => {
+  let query = 'SELECT max(id_atendimento) ultimo FROM atendimentos WHERE id_tratamento=?';
+  try{
+  let rows = await connecttion.query(query, id_tratamento);
+  return rows;
+  } catch (err) { console.log(err); return 5;  }
+}
+

@@ -79,6 +79,14 @@ exports.SelectPacienteCpfResp = async (cpfresp) => {
   } catch (err) { console.log(err); return 5;  }
 }
 
+exports.SelectPacienteCpfCpfResp = async (cpf, cpfresp) => {
+  let query = 'SELECT * FROM pacientes WHERE cpf LIKE ? or cpfresp LIKE ? ORDER BY cpf DESC';
+  try{
+  let rows = await connecttion.query(query, [cpf, cpfresp]);
+  return rows;
+  } catch (err) { console.log(err); return 5;  }
+}
+
 exports.SelectPacienteCns = async (cns) => {
   let query = 'SELECT * FROM pacientes WHERE cns LIKE ?';
   try{

@@ -80,6 +80,15 @@ router.get('/cpfresp', async (req, res, next) => {
   }
 });
 
+router.get('/cpfcpfresp', async (req, res, next) => {
+  res.header('Content-Type','application/json');
+  let retorno = await servicePacientes.RuleSelectPacienteCpfCpfResp(req.query.cpf,req.query.cpfresp);
+  switch (retorno) {  
+    case 2: return res.status(404).send({});    
+    case 5: return res.status(500).send({});
+    default: return res.status(200).send(retorno);    
+  }
+});
 
 router.get('/cns', async (req, res, next) => {
   res.header('Content-Type','application/json');

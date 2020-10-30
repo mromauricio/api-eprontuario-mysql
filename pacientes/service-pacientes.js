@@ -84,6 +84,13 @@ exports.RuleSelectPacienteCpfResp = async (query) => {
   return retorno;
 }
 
+exports.RuleSelectPacienteCpfCpfResp = async (cpf, cpfresp) => {
+  let retorno = await daoPacientes.SelectPacienteCpfCpfResp(cpf, cpfresp)
+  if (retorno=='') return 2;
+  if (retorno==5) return 5;
+  return retorno;
+}
+
 exports.RuleSelectPacienteCns = async (query) => {
   let retorno = await daoPacientes.SelectPacienteCns(query)
   if (retorno=='') return 2;

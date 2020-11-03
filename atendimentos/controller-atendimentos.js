@@ -28,6 +28,14 @@ router.put('/', async (req, res, next) => {
   }
 });
 
+router.delete('/', async (req, res, next) => {
+  switch (await serviceAtendimentos.RuleDeleteAtendimento(req.body)) {
+    case 0: return res.status(200).send();
+    case 3: return res.status(406).send();
+    case 5: return res.status(500).send();    
+  }
+});
+
 router.get('/paciente', async (req, res, next) => {
   res.header('Content-Type','application/json');
   let retorno = await serviceAtendimentos.RuleSelectTratamentosPaciente(req.query.id);

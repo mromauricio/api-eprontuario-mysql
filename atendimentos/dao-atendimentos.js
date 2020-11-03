@@ -10,7 +10,7 @@ exports.InsertTratamento = async (data) => {
   }
   catch (err) { console.log(err); return 5; }
   let query2 = 'INSERT INTO atendimentos SET ?';
-  let post2 = {id_atendimento:0, id_tratamento:retornoInsert.insertId, id_profissional:data.id_profissional, preenchido:data.preenchido, data:data.data, horario:data.horario, duracao:data.duracao, queixa:data.queixa, quadrogeral:data.quadrogeral, trajetodor:data.trajetodor, intensidadedor:data.intensidadedor, tipodor:data.tipodor, evolucao:data.evolucao, agravante:data.agravante, atenuante:data.atenuante, tratamentoanterior:data.tratamentoanterior, id_formulario:data.id_formulario};
+  let post2 = {id_atendimento:0, id_tratamento:retornoInsert.insertId, id_profissional:data.id_profissional, preenchido:data.preenchido, data:data.data, horario:data.horario, duracao:data.duracao, queixa:data.queixa, quadrogeral:data.quadrogeral, trajetodor:data.trajetodor, intensidadedor:data.intensidadedor, tipodor:data.tipodor, avaliacao:data.avaliacao, agravante:data.agravante, atenuante:data.atenuante, tratamentoanterior:data.tratamentoanterior, id_formulario:data.id_formulario};
   try{
     let retorno =  await connecttion.query(query2, post2);
     if (retorno.affectedRows == 1 ) return 0;
@@ -27,7 +27,7 @@ exports.InsertAtendimento = async (data) => {
   }
   catch (err) { console.log(err); return 5; }
   let query2 = 'INSERT INTO atendimentos SET ?';
-  let post2 = {id_atendimento:0, id_profissional:data.id_profissional, id_tratamento:data.id_tratamento, preenchido:data.preenchido, data:data.data, horario:data.horario, duracao:data.duracao, queixa:data.queixa, quadrogeral:data.quadrogeral, trajetodor:data.trajetodor, intensidadedor:data.intensidadedor, tipodor:data.tipodor, evolucao:data.evolucao, agravante:data.agravante, atenuante:data.atenuante, tratamentoanterior:data.tratamentoanterior, id_formulario:data.id_formulario};
+  let post2 = {id_atendimento:0, id_profissional:data.id_profissional, id_tratamento:data.id_tratamento, preenchido:data.preenchido, data:data.data, horario:data.horario, duracao:data.duracao, queixa:data.queixa, quadrogeral:data.quadrogeral, trajetodor:data.trajetodor, intensidadedor:data.intensidadedor, tipodor:data.tipodor, avaliacao:data.avaliacao, agravante:data.agravante, atenuante:data.atenuante, tratamentoanterior:data.tratamentoanterior, id_formulario:data.id_formulario};
   try{
     let retorno =  await connecttion.query(query2, post2);
     if (retorno.affectedRows == 1 ) return 0;
@@ -44,13 +44,21 @@ exports.UpdateAtendimento = async (data) => {
   }
   catch (err) { console.log(err); return 5; }
   let query2 = 'UPDATE atendimentos SET ? WHERE id_atendimento = ?';
-  let post2 = {preenchido:data.preenchido, data:data.data, horario:data.horario, duracao:data.duracao, quadrogeral:data.quadrogeral, queixa:data.queixa, trajetodor:data.trajetodor, intensidadedor:data.intensidadedor, tipodor:data.tipodor, evolucao:data.evolucao, agravante:data.agravante, atenuante:data.atenuante, tratamentoanterior:data.tratamentoanterior, id_formulario:data.id_formulario};
+  let post2 = {preenchido:data.preenchido, data:data.data, horario:data.horario, duracao:data.duracao, quadrogeral:data.quadrogeral, queixa:data.queixa, trajetodor:data.trajetodor, intensidadedor:data.intensidadedor, tipodor:data.tipodor, avaliacao:data.avaliacao, agravante:data.agravante, atenuante:data.atenuante, tratamentoanterior:data.tratamentoanterior, id_formulario:data.id_formulario};
   try{
       let retorno =  await connecttion.query(query2, [post2, data.id_atendimento]);
       if (retorno.affectedRows == 1 ) return 0;
       return 5;
   }
   catch (err) { console.log(err); return 5; }
+}
+
+exports.DeleteAtendimento = async (body) => {
+  let query = 'DELETE FROM atendimentos WHERE id_atendimento=?';
+  try{
+  let retorno = await connecttion.query(query, body.id_atendimento);
+  if (retorno.affectedRows == 1) return 0;
+  } catch (err) { console.log(err); return 5;  }
 }
 
 exports.SelectTratamentosPaciente = async (id_paciente) => {

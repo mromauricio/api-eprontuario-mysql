@@ -17,6 +17,11 @@ exports.RuleUpdateAtendimento = async (data) => {
   return 5;
 }
 
+exports.RuleDeleteAtendimento = async (data) => {
+  if (await daoAtendimentos.DeleteAtendimento(data) == 0) return 0;
+  return 5;
+}
+
 exports.RuleSelectTratamentosPaciente = async (query) => {
   let retorno = await daoAtendimentos.SelectTratamentosPaciente(query)
   if (retorno == '') return 2;

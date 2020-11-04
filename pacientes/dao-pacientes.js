@@ -80,7 +80,7 @@ exports.SelectPacienteCpfResp = async (cpfresp) => {
 }
 
 exports.SelectPacienteCpfCpfResp = async (cpf, cpfresp) => {
-  let query = 'SELECT * FROM pacientes WHERE cpf LIKE ? or cpfresp LIKE ? ORDER BY cpf DESC';
+  let query = 'SELECT * FROM pacientes WHERE cpf LIKE ? or cpfresp LIKE ? ORDER BY nome asc';
   try{
   let rows = await connecttion.query(query, [cpf, cpfresp]);
   return rows;

@@ -1,4 +1,5 @@
 const async = require('async');
+const { rmSync } = require('fs');
 const connecttion = require('../src/database.js');
 
 exports.InsertTratamento = async (data) => {
@@ -99,6 +100,8 @@ exports.SelectUltimoquadrogeral = async (id_tratamento) => {
   try{
   let rows = await connecttion.query(query, id_tratamento);
   return rows;
-  } catch (err) { console.log(err); return 5;  }
+  } catch (err) { console.log(err); return 5; }
 }
+
+
 

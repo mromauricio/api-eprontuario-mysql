@@ -1,0 +1,50 @@
+
+
+# Inicializar container com volume do SO
+/MySQL
+docker run -d -v $(pwd)/db/data:/var/lib/mysql --rm --name mysql-container mysql-image
+
+
+# Executar os comandos contidos no arq. script.sql
+docker exec -i mysql-container mysql -uroot -ppwdmysql < db/script2.sql
+
+
+# Acessar linha de comando do container
+docker exec -it mysql-container /bin/bash
+
+# Acessar o BD
+mysql -uroot -ppwdmysql
+
+# Definir instância
+use eprontuario
+
+# Parar container
+docker stop mysql-container
+
+# Descobrir IPAddress contatiner
+docker inspect mysql-container
+
+
+
+======
+NODE container
+
+/MySQL
+docker run -d -v $(pwd)/api:/home/node/app -p 9001:9001 --link mysql-container --rm --name node-container node-image
+
+
+======
+docker-compose up -d
+======
+ --default-authentication-plugin=mysql_native_password
+ALTER USER root IDENTIFIED WITH mysql_native_password BY 'pwdmysql';
+flush privileges;
+
+show create table pacientes;  // Ver Charset, unique keys etc
+
+docker-compose.yml
+command: --default-time-zone='-3:00'
+
+SELECT @@GLOBAL.time_zone, @@SESSION.time_zone;
+SET GLOBAL time_zone = '-3:00';
+SET time_zone = '-3:00';

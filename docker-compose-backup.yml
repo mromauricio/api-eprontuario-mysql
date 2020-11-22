@@ -1,0 +1,25 @@
+version: "3.7"
+services:
+  db:
+    image: mysql-image
+    command: --default-time-zone='-3:00'
+    container_name: mysql-container
+    environment:
+      MYSQL_ROOT_PASSWORD: pwdmysql
+    volumes:
+      - ./db/data:/var/lib/mysql
+    restart: always  
+    ports:
+      - 3306:3306
+  api:
+    image: node-image
+    container_name: node-container
+    restart: always
+    volumes: 
+      - ./api:/home/node/app
+    ports:
+      - 9001:9001
+    links:
+      - "db"
+    depends_on: 
+      - "db"        

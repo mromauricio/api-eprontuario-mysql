@@ -48,3 +48,8 @@ command: --default-time-zone='-3:00'
 SELECT @@GLOBAL.time_zone, @@SESSION.time_zone;
 SET GLOBAL time_zone = '-3:00';
 SET time_zone = '-3:00';
+
+
+====== cloudbeaver =======
+sudo docker run --name cloudbeaver --rm -ti -p 8080:8978 -v /Users/mauriciooliveira/dbeaver:/opt/cloudbeaver/workspace dbeaver/cloudbeaver:latest
+

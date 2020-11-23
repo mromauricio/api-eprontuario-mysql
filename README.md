@@ -1,4 +1,4 @@
-# API Node.Js eProntuario
+# API for eProntuario with NodeJs and MySQL
 
 Tem por função intermediar a comunicação entre a aplicação eProntuario e o SGBD MySQL.
 Utiliza framework Express 4.17.1 e dependência mysql 2.18.1.

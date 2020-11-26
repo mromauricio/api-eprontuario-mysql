@@ -71,7 +71,7 @@ exports.SelectTratamentosPaciente = async (id_paciente) => {
 }
 
 exports.SelectAtendimentosTratamento = async (id_tratamento) => {
-  let query = 'SELECT f.tipo formulario, pro.nome profissional, pac.nome paciente, t.descricao titulotratamento, t.status, t.id_paciente, a.* FROM atendimentos a INNER JOIN profissionais pro ON a.id_profissional=pro.id_profissional  INNER JOIN tratamentos t ON a.id_tratamento=t.id_tratamento  INNER JOIN pacientes pac ON pac.id_paciente=t.id_paciente INNER JOIN formularios f ON a.id_formulario=f.id_formulario WHERE  a.id_tratamento=? ORDER BY a.data DESC';
+  let query = 'SELECT f.tipo formulario, pro.nome profissional, pac.nome paciente, pac.ativo, t.descricao titulotratamento, t.status, t.id_paciente, a.* FROM atendimentos a INNER JOIN profissionais pro ON a.id_profissional=pro.id_profissional  INNER JOIN tratamentos t ON a.id_tratamento=t.id_tratamento  INNER JOIN pacientes pac ON pac.id_paciente=t.id_paciente INNER JOIN formularios f ON a.id_formulario=f.id_formulario WHERE  a.id_tratamento=? ORDER BY a.data DESC';
   try{
   let rows = await connecttion.query(query, id_tratamento);
   return rows;

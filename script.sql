@@ -86,7 +86,7 @@ CREATE TABLE IF NOT EXISTS atendimentos (
   id_formulario INT(3),
   PRIMARY KEY (id_atendimento),
   FOREIGN KEY (id_profissional) REFERENCES profissionais(id_profissional),
-  FOREIGN KEY (id_tratamento) REFERENCES tratamentos(id_tratamento),
+  FOREIGN KEY (id_tratamento) REFERENCES tratamentos(id_tratamento) ON DELETE CASCADE ON UPDATE NO ACTION,
   FOREIGN KEY (id_formulario) REFERENCES formularios(id_formulario)
 );
 

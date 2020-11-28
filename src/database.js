@@ -1,14 +1,24 @@
 let mysql = require('mysql');
 let util = require('util');
 
+// let pool = mysql.createPool({
+//     connectionLimit: 10,
+//     host: 'mysql-container', //172.17.0.2
+//     user: 'root',
+//     password: 'pwdmysql',
+//     database: 'eprontuario',
+//     insecureAuth: true 
+// });
+
 let pool = mysql.createPool({
-    connectionLimit: 10,
-    host: 'mysql-container', //172.17.0.2
-    user: 'root',
-    password: 'pwdmysql',
-    database: 'eprontuario',
-    insecureAuth: true 
+  connectionLimit: 10,
+  host: 'database-test.c1a7jytzvqfa.sa-east-1.rds.amazonaws.com', 
+  user: 'admin',
+  password: 'pwdmysql',
+  database: 'eprontuario',
+  insecureAuth: true 
 });
+
 
 pool.getConnection((err, connection) => {
   if (err) {
